@@ -12,7 +12,9 @@
     "start": "concurrently -k -n trendhub,matrimony,landhub,doctors,kakdwip,namkhana \"npm:start:trendhub\" \"npm:start:matrimony\" \"npm:start:landhub\" \"npm:start:doctors\" \"npm:start:kakdwip\" \"npm:start:namkhana\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:pages": "node scripts/build-pages.mjs",
+    "deploy": "npm run build:pages && angular-cli-ghpages --dir=dist/pages --no-notfound"
   },
   "private": true,
   "packageManager": "npm@10.9.8",
@@ -31,6 +33,7 @@
     "@angular/build": "^22.2.7",
     "@angular/cli": "^22.1.4",
     "@angular/compiler-cli": "^22.1.0",
+    "angular-cli-ghpages": "^3.1.2",
     "jsdom": "^30.0.0",
     "ng-packagr": "^22.2.0",
     "prettier": "^3.8.1",

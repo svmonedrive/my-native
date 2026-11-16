@@ -1,3 +1,19 @@
+look at the project structure first.
+a-common-lib is just an empty library will put reusable components/directive/service here.
+admin-portal is an application where admin can do CRUD operations.
+host-app folder can hold several apps tenant based. any customer can ask for new app then I will generate new app here with their theme/layout/doc/ as per their need.
+
+service-app folder can hold multiple service app, as of now 4 placeholder service apps are there, later I will implement each service and will add more service.
+
+now all these service will be available in each host app (only exclude some if tenant owner ask to remove).
+
+Now each host apps are spcific club house in different location. I have to design the host app page as per their need.
+There is a app-catalog.ts file which define which app will be displayed for the specific club (host app).
+Once end user click on the service app (displayed in the host app) it will redirect to the service app.
+
+once you understand this entire project structure let me know.
+
+
 # MyNative
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.4.

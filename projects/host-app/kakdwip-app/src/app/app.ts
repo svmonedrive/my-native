@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
 
-import { appUrl, UTILITY_APPS } from './app-catalog';
+import { resolveServiceApps } from 'a-common-lib';
+
+import { KAKDWIP_CATALOG } from './app-catalog';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,5 @@ import { appUrl, UTILITY_APPS } from './app-catalog';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly apps = UTILITY_APPS.map((app) => ({ ...app, url: appUrl(app) }));
+  protected readonly apps = resolveServiceApps(KAKDWIP_CATALOG);
 }
