@@ -3,7 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start:trendhub": "ng serve trendhub-app --port 6201",
+    "start:matrimony": "ng serve matrimony-app --port 6202",
+    "start:landhub": "ng serve landhub-app --port 6203",
+    "start:doctors": "ng serve doctors-app --port 6204",
+    "start:kakdwip": "ng serve kakdwip-app --port 7201",
+    "start:namkhana": "ng serve namkhana-app --port 7202",
+    "start": "concurrently -k -n trendhub,matrimony,landhub,doctors,kakdwip,namkhana \"npm:start:trendhub\" \"npm:start:matrimony\" \"npm:start:landhub\" \"npm:start:doctors\" \"npm:start:kakdwip\" \"npm:start:namkhana\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -17,6 +23,7 @@
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
     "@angular/router": "^22.1.0",
+    "concurrently": "^10.0.7",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
