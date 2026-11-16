@@ -1,0 +1,12 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <div class="map" libReveal>
+    @if (embedUrl(); as url) {
+      <iframe [src]="url" title="Map" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    }
+  </div>
+  <p class="address" libReveal>
+    <span>{{ addressKey() | t }}</span>
+    <a [href]="linkUrl()" target="_blank" rel="noopener">{{ 'common.openInMaps' | t }} ↗</a>
+  </p>
+</div>

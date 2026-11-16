@@ -1,0 +1,12 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <ol>
+    @for (event of events(); track event.titleKey) {
+      <li libReveal>
+        <time [attr.datetime]="event.date">{{ formatDate(event.date) }}</time>
+        <h3>{{ event.titleKey | t }}</h3>
+        <p>{{ event.descriptionKey | t }}</p>
+      </li>
+    }
+  </ol>
+</div>

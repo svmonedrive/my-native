@@ -1,0 +1,5 @@
+<div class="content" libReveal>
+  <h1>{{ titleKey() | t }}</h1>
+  <p>{{ subtitleKey() | t }}</p>
+  <a class="cta" [href]="'#' + ctaTarget()" (click)="go($event)">{{ ctaKey() | t }}</a>
+</div>

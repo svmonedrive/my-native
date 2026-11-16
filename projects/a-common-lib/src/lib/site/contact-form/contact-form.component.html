@@ -1,0 +1,35 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate libReveal>
+    <label>
+      <span>{{ 'common.name' | t }} *</span>
+      <input type="text" formControlName="name" autocomplete="name" />
+      @if (error('name'); as key) { <small>{{ key | t }}</small> }
+    </label>
+
+    <label>
+      <span>{{ 'common.email' | t }} *</span>
+      <input type="email" formControlName="email" autocomplete="email" />
+      @if (error('email'); as key) { <small>{{ key | t }}</small> }
+    </label>
+
+    <label class="wide">
+      <span>{{ 'common.phone' | t }} ({{ 'common.optional' | t }})</span>
+      <input type="tel" formControlName="phone" autocomplete="tel" />
+    </label>
+
+    <label class="wide">
+      <span>{{ 'common.message' | t }} *</span>
+      <textarea rows="5" formControlName="message"></textarea>
+      @if (error('message'); as key) { <small>{{ key | t }}</small> }
+    </label>
+
+    <div class="actions wide">
+      <button type="submit">{{ 'common.send' | t }}</button>
+      @if (sent()) {
+        <p class="sent" role="status">{{ 'common.sent' | t }}</p>
+      }
+    </div>
+  </form>
+</div>

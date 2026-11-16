@@ -1,0 +1,101 @@
+:host {
+  display: block;
+  padding: 5rem 1rem;
+  scroll-margin-top: 4.5rem;
+  background: var(--section-bg, var(--color-bg));
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  padding: 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 500;
+  color: var(--color-text);
+
+  &.wide {
+    grid-column: 1 / -1;
+  }
+}
+
+input,
+textarea {
+  padding: 0.7rem 0.8rem;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+small {
+  color: #dc2626;
+  font-weight: 400;
+}
+
+:root[data-theme='dark'] small {
+  color: #f87171;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  padding: 0.8rem 2rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--color-on-primary);
+  background: var(--color-primary);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+  }
+}
+
+.sent {
+  margin: 0;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  form {
+    grid-template-columns: 1fr;
+    padding: 1.25rem;
+  }
+}

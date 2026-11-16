@@ -1,0 +1,12 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <div class="cards">
+    @for (service of services(); track service.path) {
+      <a class="card" [href]="service.url" libReveal>
+        <h3>{{ service.nameKey | t }}</h3>
+        <p>{{ service.descriptionKey | t }}</p>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    }
+  </div>
+</div>

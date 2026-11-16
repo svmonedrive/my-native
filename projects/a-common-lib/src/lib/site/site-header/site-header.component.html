@@ -1,0 +1,24 @@
+<div class="bar">
+  <a class="brand" href="#" (click)="toTop($event)">{{ brandKey() | t }}</a>
+
+  <nav id="site-nav" [class.open]="menuOpen()" aria-label="Primary">
+    @for (link of links(); track link.id) {
+      <a [href]="'#' + link.id" [class.active]="active() === link.id" (click)="goTo(link.id, $event)">
+        {{ link.labelKey | t }}
+      </a>
+    }
+  </nav>
+
+  <lib-preferences class="prefs" />
+
+  <button
+    type="button"
+    class="burger"
+    aria-controls="site-nav"
+    [attr.aria-expanded]="menuOpen()"
+    [attr.aria-label]="'common.menu' | t"
+    (click)="menuOpen.set(!menuOpen())"
+  >
+    <span></span><span></span><span></span>
+  </button>
+</div>

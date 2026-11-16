@@ -14,5 +14,5 @@
   (click)="theme.toggleMode()"
 >
   {{ theme.mode() === 'dark' ? '☀' : '☾' }}
-  {{ (theme.mode() === 'dark' ? 'common.light' : 'common.dark') | t }}
+  <span class="label">{{ (theme.mode() === 'dark' ? 'common.light' : 'common.dark') | t }}</span>
 </button>
