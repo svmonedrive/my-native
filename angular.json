@@ -94,7 +94,9 @@
                 "input": "projects/admin-portal/public"
               }
             ],
-            "styles": ["projects/admin-portal/src/styles.scss"]
+            "styles": [
+              "projects/admin-portal/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -160,7 +162,9 @@
                 "input": "projects/service-app/matrimony-app/public"
               }
             ],
-            "styles": ["projects/service-app/matrimony-app/src/styles.scss"]
+            "styles": [
+              "projects/service-app/matrimony-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -226,7 +230,9 @@
                 "input": "projects/service-app/landhub-app/public"
               }
             ],
-            "styles": ["projects/service-app/landhub-app/src/styles.scss"]
+            "styles": [
+              "projects/service-app/landhub-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -292,7 +298,9 @@
                 "input": "projects/host-app/kakdwip-app/public"
               }
             ],
-            "styles": ["projects/host-app/kakdwip-app/src/styles.scss"]
+            "styles": [
+              "projects/host-app/kakdwip-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -359,7 +367,9 @@
                 "input": "projects/host-app/namkhana-app/public"
               }
             ],
-            "styles": ["projects/host-app/namkhana-app/src/styles.scss"]
+            "styles": [
+              "projects/host-app/namkhana-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -426,7 +436,9 @@
                 "input": "projects/service-app/trendhub-app/public"
               }
             ],
-            "styles": ["projects/service-app/trendhub-app/src/styles.scss"]
+            "styles": [
+              "projects/service-app/trendhub-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
@@ -492,7 +504,9 @@
                 "input": "projects/service-app/doctors-app/public"
               }
             ],
-            "styles": ["projects/service-app/doctors-app/src/styles.scss"]
+            "styles": [
+              "projects/service-app/doctors-app/src/styles.scss"
+            ]
           },
           "configurations": {
             "production": {
