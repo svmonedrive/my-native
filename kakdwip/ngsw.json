@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1794849767539,
+  "timestamp": 1794855380472,
   "index": "/my-native/kakdwip/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/my-native/kakdwip/favicon.ico",
         "/my-native/kakdwip/index.html",
-        "/my-native/kakdwip/main-P5WXI6BR.js",
+        "/my-native/kakdwip/main-M7F3TOJO.js",
         "/my-native/kakdwip/manifest.webmanifest",
         "/my-native/kakdwip/styles-5INURTSO.css"
       ],
@@ -50,8 +50,8 @@
     "/my-native/kakdwip/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/my-native/kakdwip/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/my-native/kakdwip/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/my-native/kakdwip/index.html": "ac157a4cec022bd018a89c0e5da8ce1f1ee9546f",
-    "/my-native/kakdwip/main-P5WXI6BR.js": "5a8aab07a49212e5b9ca378e6c61e654d88d2edb",
+    "/my-native/kakdwip/index.html": "0a2c3a3cd74e274d8f150324bfe36968775a829c",
+    "/my-native/kakdwip/main-M7F3TOJO.js": "2d60dbb877e98be81d8cc2be187cb6bb7690eea4",
     "/my-native/kakdwip/manifest.webmanifest": "2e372bef92f7a3217935094f6118927a52e1adde",
     "/my-native/kakdwip/styles-5INURTSO.css": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
   },
