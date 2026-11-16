@@ -1,5 +1,5 @@
 :host {
-  --fg: var(--color-on-primary);
+  --fg: var(--header-fg-top, var(--color-on-primary));
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   position: fixed;
   inset: 0 0 auto 0;

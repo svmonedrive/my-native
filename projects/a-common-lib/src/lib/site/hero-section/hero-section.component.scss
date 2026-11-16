@@ -1,4 +1,6 @@
 :host {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +17,8 @@
 }
 
 .content {
+  position: relative;
+  z-index: 1;
   max-width: 760px;
 }
 
@@ -46,5 +50,45 @@ p {
   &:focus-visible {
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  }
+}
+
+// ---- With a video: dark backdrop, oval video in the middle that fades out towards the edges.
+:host(.has-video) {
+  color: #fff;
+  background:
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--color-primary) 38%, #05080c) 0%, #05080c 72%),
+    linear-gradient(180deg, #05080c, #0a1016);
+
+  h1,
+  p {
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.75);
+  }
+}
+
+.video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(1100px, 130vw);
+  aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  // Oval: opaque in the middle, fading to transparent (= the dark backdrop) towards the rim.
+  -webkit-mask-image: radial-gradient(ellipse closest-side, #000 52%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side, #000 52%, transparent 100%);
+
+  // Dim the picture so the headline stays readable.
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 8, 12, 0.45);
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 }

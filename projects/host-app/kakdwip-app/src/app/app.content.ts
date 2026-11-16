@@ -13,3 +13,6 @@ export const EVENTS: TimelineEvent[] = [
   { date: '2027-02-20', titleKey: 'events.health.title', descriptionKey: 'events.health.desc' },
   { date: '2027-03-14', titleKey: 'events.meet.title', descriptionKey: 'events.meet.desc' },
 ];
+
+/** PLACEHOLDER hero video (public YouTube video: Blender's "Big Buck Bunny"). Replace with the club's own video id. */
+export const HERO_VIDEO_ID = 'aqz-KE-bpKQ';

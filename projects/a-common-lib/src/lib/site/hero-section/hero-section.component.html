@@ -1,3 +1,15 @@
+@if (videoUrl(); as url) {
+  <div class="video" aria-hidden="true">
+    <iframe
+      [src]="url"
+      title="Background video"
+      tabindex="-1"
+      allow="autoplay; encrypted-media"
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+}
+
 <div class="content" libReveal>
   <h1>{{ titleKey() | t }}</h1>
   <p>{{ subtitleKey() | t }}</p>

@@ -15,7 +15,7 @@ import {
 } from 'a-common-lib';
 
 import { KAKDWIP_CATALOG } from './app-catalog';
-import { CONTACT_EMAIL, EVENTS, LOCATION } from './app.content';
+import { CONTACT_EMAIL, EVENTS, HERO_VIDEO_ID, LOCATION } from './app.content';
 
 @Component({
   imports: [
@@ -44,6 +44,7 @@ export class AppComponent {
     { id: 'contact', labelKey: 'nav.contact' },
   ];
   protected readonly apps = resolveServiceApps(KAKDWIP_CATALOG);
+  protected readonly heroVideoId = HERO_VIDEO_ID;
   protected readonly events = EVENTS;
   protected readonly location = LOCATION;
   protected readonly year = new Date().getFullYear();

@@ -1,3 +1,8 @@
+// The hero is always dark (video), so the transparent header uses white text at the top of the page.
+lib-site-header {
+  --header-fg-top: #fff;
+}
+
 // Alternate the section backgrounds: the sections read --section-bg.
 lib-event-timeline,
 lib-contact-form {
