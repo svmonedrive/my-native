@@ -17,8 +17,10 @@ export const LANGUAGES = [
 ] as const;
 
 export type Lang = (typeof LANGUAGES)[number]['code'];
-export type Messages = Readonly<Record<string, string>>;
-export type MessageBundle = Readonly<Partial<Record<Lang, Messages>>>;
+/** One text in every supported language. Leaving a language out is a compile error. */
+export type Translation = Readonly<Record<Lang, string>>;
+/** `{ 'some.key': { en: '...', bn: '...', hi: '...' } }` */
+export type MessageBundle = Readonly<Record<string, Translation>>;
 
 const DEFAULT_LANG: Lang = 'en';
 /** Shared by every app (same origin in production) so the choice follows the user between host and service apps. */
@@ -35,14 +37,9 @@ export class I18nService {
   readonly languages = LANGUAGES;
   readonly lang = signal<Lang>(this.initialLang());
 
-  private readonly merged = computed(() => {
-    const lang = this.lang();
-    const bundles = [COMMON_MESSAGES, ...this.appMessages()];
-    return {
-      current: Object.assign({}, ...bundles.map((b) => b[lang])) as Record<string, string>,
-      fallback: Object.assign({}, ...bundles.map((b) => b[DEFAULT_LANG])) as Record<string, string>,
-    };
-  });
+  private readonly merged = computed(
+    () => Object.assign({}, COMMON_MESSAGES, ...this.appMessages()) as Record<string, Translation>,
+  );
 
   /** Registers an app's own messages (later bundles win over earlier / common ones). */
   addMessages(bundle: MessageBundle): void {
@@ -66,8 +63,8 @@ export class I18nService {
 
   /** Translates `key`; falls back to English, then to the key itself. `{name}` placeholders use `params`. */
   t(key: string, params?: Record<string, string | number>): string {
-    const { current, fallback } = this.merged();
-    const text = current[key] ?? fallback[key] ?? key;
+    const entry = this.merged()[key];
+    const text = entry?.[this.lang()] || entry?.[DEFAULT_LANG] || key;
     return params ? text.replace(/\{(\w+)\}/g, (m, p) => (p in params ? String(params[p]) : m)) : text;
   }
 

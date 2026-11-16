@@ -1,7 +1,5 @@
 import type { MessageBundle } from 'a-common-lib';
 
 export const APP_MESSAGES: MessageBundle = {
-  en: { 'app.title': 'Namkhana Club House' },
-  bn: { 'app.title': 'নামখানা ক্লাব হাউস' },
-  hi: { 'app.title': 'नामखाना क्लब हाउस' },
+  'app.title': { en: 'Namkhana Club House', bn: 'নামখানা ক্লাব হাউস', hi: 'नामखाना क्लब हाउस' },
 };
