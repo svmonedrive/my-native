@@ -10,15 +10,32 @@
   box-sizing: border-box;
   text-align: center;
   color: var(--color-on-primary);
+  background: var(--color-primary);
+}
+
+// Parallax: --py is the page scroll distance (px), set by the component while the hero is on screen.
+// The background drifts at half speed, the text a little slower than the page and fades out.
+.bg {
+  position: absolute;
+  inset: -60% 0 0 0; // extra height above, revealed as the layer moves down
+  z-index: 0;
   background:
     radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--color-accent) 40%, transparent), transparent 42%),
     radial-gradient(circle at 12% 88%, color-mix(in srgb, var(--color-on-primary) 18%, transparent), transparent 40%),
     linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  transform: translate3d(0, calc(var(--py, 0) * 0.5px), 0);
+  will-change: transform;
+}
+
+.layer {
+  position: relative;
+  z-index: 1;
+  transform: translate3d(0, calc(var(--py, 0) * 0.3px), 0);
+  opacity: var(--fade, 1);
+  will-change: transform, opacity;
 }
 
 .content {
-  position: relative;
-  z-index: 1;
   max-width: 760px;
 }
 
@@ -56,9 +73,13 @@ p {
 // ---- With a video: dark backdrop, oval video in the middle that fades out towards the edges.
 :host(.has-video) {
   color: #fff;
-  background:
-    radial-gradient(ellipse at center, color-mix(in srgb, var(--color-primary) 38%, #05080c) 0%, #05080c 72%),
-    linear-gradient(180deg, #05080c, #0a1016);
+  background: #05080c;
+
+  .bg {
+    background:
+      radial-gradient(ellipse at center, color-mix(in srgb, var(--color-primary) 38%, #05080c) 0%, #05080c 72%),
+      linear-gradient(180deg, #05080c, #0a1016);
+  }
 
   h1,
   p {
@@ -72,7 +93,8 @@ p {
   left: 50%;
   width: min(1100px, 130vw);
   aspect-ratio: 16 / 9;
-  transform: translate(-50%, -50%);
+  z-index: 0;
+  transform: translate(-50%, calc(-50% + var(--py, 0) * 0.5px)); // moves with the background
   pointer-events: none;
   // Oval: opaque in the middle, fading to transparent (= the dark backdrop) towards the rim.
   -webkit-mask-image: radial-gradient(ellipse closest-side, #000 52%, transparent 100%);
@@ -90,5 +112,23 @@ p {
     width: 100%;
     height: 100%;
     border: 0;
+  }
+}
+
+.tagline {
+  display: block;
+  margin: 0 0 1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: inherit;
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg,
+  .layer,
+  .video {
+    will-change: auto;
   }
 }

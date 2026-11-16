@@ -1,0 +1,12 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <div class="tiles">
+    @for (tile of tiles(); track tile.labelKey) {
+      <a class="tile" [href]="'#' + tile.target" (click)="go(tile.target, $event)" libReveal>
+        <span class="icon" aria-hidden="true">{{ tile.icon }}</span>
+        <h3>{{ tile.labelKey | t }}</h3>
+        <p>{{ tile.textKey | t }}</p>
+      </a>
+    }
+  </div>
+</div>

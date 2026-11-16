@@ -1,0 +1,18 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <div class="grid">
+    @for (card of cards(); track card.titleKey) {
+      <article libReveal>
+        <div class="band">
+          @if (card.tagKey; as tag) {
+            <span>{{ tag | t }}</span>
+          }
+        </div>
+        <div class="body">
+          <h3>{{ card.titleKey | t }}</h3>
+          <p>{{ card.textKey | t }}</p>
+        </div>
+      </article>
+    }
+  </div>
+</div>

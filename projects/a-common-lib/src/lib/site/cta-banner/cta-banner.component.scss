@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  padding: 4.5rem 1rem;
+  text-align: center;
+  color: var(--color-on-primary);
+  background: linear-gradient(120deg, var(--color-primary), var(--color-secondary));
+}
+
+.inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+
+p {
+  margin: 0 0 1.6rem;
+  opacity: 0.92;
+}
+
+a {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
+}

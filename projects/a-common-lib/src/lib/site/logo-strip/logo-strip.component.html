@@ -1,0 +1,8 @@
+<div class="inner">
+  <lib-section-heading [titleKey]="titleKey()" [subtitleKey]="subtitleKey()" libReveal />
+  <ul libReveal>
+    @for (key of nameKeys(); track key) {
+      <li>{{ key | t }}</li>
+    }
+  </ul>
+</div>

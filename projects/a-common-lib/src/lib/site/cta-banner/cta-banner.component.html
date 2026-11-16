@@ -1,0 +1,7 @@
+<div class="inner" libReveal>
+  <h2>{{ titleKey() | t }}</h2>
+  @if (textKey(); as key) {
+    <p>{{ key | t }}</p>
+  }
+  <a [href]="'#' + target()" (click)="go($event)">{{ ctaKey() | t }}</a>
+</div>

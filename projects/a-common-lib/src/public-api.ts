@@ -19,3 +19,7 @@ export * from './lib/site/services-section/services-section.component';
 export * from './lib/site/event-timeline/event-timeline.component';
 export * from './lib/site/map-section/map-section.component';
 export * from './lib/site/contact-form/contact-form.component';
+export * from './lib/site/action-tiles/action-tiles.component';
+export * from './lib/site/card-grid/card-grid.component';
+export * from './lib/site/logo-strip/logo-strip.component';
+export * from './lib/site/cta-banner/cta-banner.component';

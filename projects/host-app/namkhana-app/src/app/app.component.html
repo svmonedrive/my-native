@@ -1,12 +1,29 @@
-<lib-app-shell titleKey="app.title">
-  <h2>{{ 'common.services' | t }}</h2>
-  <div class="cards">
-    @for (app of apps; track app.path) {
-    <a class="card" [href]="app.url">
-      <h3>{{ app.nameKey | t }}</h3>
-      <p>{{ app.descriptionKey | t }}</p>
-    </a>
-    }
-  </div>
-  <router-outlet />
-</lib-app-shell>
+<lib-site-header brandKey="app.title" [links]="links" />
+
+<main>
+  <lib-hero-section
+    id="home"
+    titleKey="hero.title"
+    taglineKey="hero.tagline"
+    subtitleKey="hero.subtitle"
+    ctaKey="hero.cta"
+    ctaTarget="involved"
+  />
+  <lib-action-tiles id="involved" titleKey="involved.title" subtitleKey="involved.subtitle" [tiles]="tiles" />
+  <lib-services-section id="services" titleKey="services.title" subtitleKey="services.subtitle" [services]="apps" />
+  <lib-logo-strip id="partners" titleKey="partners.title" subtitleKey="partners.subtitle" [nameKeys]="partners" />
+  <lib-card-grid id="stories" titleKey="stories.title" subtitleKey="stories.subtitle" [cards]="stories" />
+  <lib-cta-banner titleKey="cta.title" textKey="cta.text" ctaKey="cta.button" target="contact" />
+  <lib-contact-form
+    id="contact"
+    titleKey="contact.title"
+    subtitleKey="contact.subtitle"
+    (submitted)="onContact($event)"
+  />
+</main>
+
+<footer>
+  <p>{{ 'footer.rights' | t: { year: year } }}</p>
+</footer>
+
+<router-outlet />
