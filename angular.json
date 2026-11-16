@@ -269,7 +269,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "projects/host-app/kakdwip-app/ngsw-config.json"
             },
             "development": {
               "optimization": false,
@@ -335,7 +336,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "projects/host-app/namkhana-app/ngsw-config.json"
             },
             "development": {
               "optimization": false,
