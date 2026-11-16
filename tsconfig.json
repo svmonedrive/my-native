@@ -1,0 +1,76 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "paths": {
+      "a-common-lib": ["./dist/a-common-lib"]
+    },
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/kakdwip-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/kakdwip-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/admin-portal/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/admin-portal/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/a-common-lib/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/a-common-lib/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/service-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/service-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/service-app/matrimony-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/service-app/matrimony-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/service-app/landhub-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/service-app/landhub-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/host-app/kakdwip-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/host-app/kakdwip-app/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/host-app/namkhana-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/host-app/namkhana-app/tsconfig.spec.json"
+    }
+  ]
+}
