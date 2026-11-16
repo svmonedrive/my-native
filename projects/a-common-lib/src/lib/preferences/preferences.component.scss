@@ -1,0 +1,7 @@
+:host { display: inline-flex; gap: 0.5rem; align-items: center; }
+select, button {
+  font: inherit; color: var(--color-on-primary); background: transparent;
+  border: 1px solid currentColor; border-radius: 6px; padding: 0.3rem 0.6rem; cursor: pointer;
+}
+select option { color: var(--color-text); background: var(--color-surface); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }

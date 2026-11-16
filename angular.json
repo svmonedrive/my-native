@@ -4,6 +4,45 @@
   "cli": {
     "packageManager": "npm"
   },
+  "schematics": {
+    "@schematics/angular:application": {
+      "skipTests": true,
+      "fileNameStyleGuide": "2016",
+      "style": "scss"
+    },
+    "@schematics/angular:component": {
+      "skipTests": true,
+      "type": "component",
+      "style": "scss"
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true,
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "skipTests": true,
+      "type": "service"
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:guard": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:class": {
+      "skipTests": true
+    },
+    "@schematics/angular:resolver": {
+      "skipTests": true,
+      "typeSeparator": "."
+    }
+  },
   "newProjectRoot": "projects",
   "projects": {
     "a-common-lib": {

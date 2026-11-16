@@ -1,0 +1,12 @@
+<lib-app-shell titleKey="app.title">
+  <h2>{{ 'common.services' | t }}</h2>
+  <div class="cards">
+    @for (app of apps; track app.path) {
+    <a class="card" [href]="app.url">
+      <h3>{{ app.nameKey | t }}</h3>
+      <p>{{ app.descriptionKey | t }}</p>
+    </a>
+    }
+  </div>
+  <router-outlet />
+</lib-app-shell>

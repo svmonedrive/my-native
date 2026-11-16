@@ -1,0 +1,18 @@
+<label class="lang">
+  <span class="sr-only">{{ 'common.language' | t }}</span>
+  <select (change)="onLang($event)">
+    @for (l of i18n.languages; track l.code) {
+      <option [value]="l.code" [selected]="l.code === i18n.lang()">{{ l.label }}</option>
+    }
+  </select>
+</label>
+<button
+  type="button"
+  class="mode"
+  [attr.aria-label]="(theme.mode() === 'dark' ? 'common.switchToLight' : 'common.switchToDark') | t"
+  [attr.title]="(theme.mode() === 'dark' ? 'common.switchToLight' : 'common.switchToDark') | t"
+  (click)="theme.toggleMode()"
+>
+  {{ theme.mode() === 'dark' ? '☀' : '☾' }}
+  {{ (theme.mode() === 'dark' ? 'common.light' : 'common.dark') | t }}
+</button>
