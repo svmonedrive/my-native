@@ -10,6 +10,8 @@ export * from './lib/preferences/preferences.component';
 export * from './lib/shell/app-shell.component';
 
 // Landing-page building blocks
+export * from './lib/auth';
+
 export * from './lib/site/reveal.directive';
 export * from './lib/site/scroll';
 export * from './lib/site/site-header/site-header.component';

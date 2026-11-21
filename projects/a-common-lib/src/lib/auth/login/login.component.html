@@ -1,0 +1,39 @@
+<section class="card">
+  @if (auth.user(); as user) {
+    <p>{{ 'auth.signedInAs' | t }} <b>{{ user.email ?? user.displayName }}</b></p>
+    <button type="button" (click)="logout()">{{ 'auth.signOut' | t }}</button>
+  } @else {
+    <h2>{{ (mode() === 'signin' ? 'auth.signIn' : 'auth.signUp') | t }}</h2>
+
+    <button type="button" (click)="run(auth.signInWithGoogle())">
+      {{ 'auth.google' | t }}
+    </button>
+    <p class="or">{{ 'auth.or' | t }}</p>
+
+    <form (ngSubmit)="submit()">
+      <label>{{ 'common.email' | t }}
+        <input name="email" type="email" autocomplete="email" required [(ngModel)]="email" />
+      </label>
+      <label>{{ 'auth.password' | t }}
+        <input name="password" type="password" minlength="6" required
+               [attr.autocomplete]="mode() === 'signin' ? 'current-password' : 'new-password'"
+               [(ngModel)]="password" />
+      </label>
+      <button type="submit" class="primary" [disabled]="busy()">
+        {{ (mode() === 'signin' ? 'auth.signIn' : 'auth.signUp') | t }}
+      </button>
+    </form>
+
+    @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+    @if (info()) { <p class="info">{{ info() }}</p> }
+
+    <p class="links">
+      <a href="#" (click)="toggle($event)">
+        {{ (mode() === 'signin' ? 'auth.noAccount' : 'auth.haveAccount') | t }}
+      </a>
+      @if (mode() === 'signin') {
+        · <a href="#" (click)="forgot($event)">{{ 'auth.forgot' | t }}</a>
+      }
+    </p>
+  }
+</section>
