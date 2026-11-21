@@ -9,12 +9,13 @@
 //   angular.json, package.json (start:host:<name> / start:service:<name> + `start`), tsconfig.json references.
 // Service app (clone of trendhub-app, port 62xx):
 //   projects/service-app/<name>-app/
+//   with login-page / home-page / provideFirebase (fill in firebase.config.ts), like matrimony-app,
 //   angular.json, package.json, tsconfig.json, SERVICE_APPS + messages in a-common-lib,
 //   and the service is excluded from every host's service-worker navigation.
 //
 // Nothing is overwritten: the script stops if the app already exists.
 
-import { cpSync, existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { fileURLToPath } from 'node:url';
@@ -195,6 +196,114 @@ if (kind === 'host') {
 
   // manifest + title
   editText(p(appRoot, 'public/manifest.webmanifest'), (t) => t);
+}
+
+// Service apps start with the same auth set-up as matrimony-app: login-page, home-page (guarded),
+// provideFirebase() and routes that always lead to home-page (the guard sends guests to login-page).
+if (kind === 'service') {
+  const app = p(appRoot, 'src/app');
+  const put = (relative, content) => {
+    const file = join(app, relative);
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, content);
+  };
+
+  put(
+    'firebase.config.ts',
+    `import { FirebaseOptions } from 'firebase/app';
+
+// TODO: paste this app's own Firebase web config (Firebase console → Project settings → Your apps → Web app).
+// It is public by design; access is protected by Firebase security rules.
+export const firebaseConfig: FirebaseOptions = {
+  apiKey: '',
+  authDomain: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: '',
+};
+`,
+  );
+
+  put(
+    'app.routes.ts',
+    `import { Routes } from '@angular/router';
+import { authGuard } from 'a-common-lib';
+import { HomePageComponent } from './pages/home-page';
+import { LoginPageComponent } from './pages/login-page';
+
+export const routes: Routes = [
+  { path: 'login-page', component: LoginPageComponent },
+  { path: 'home-page', component: HomePageComponent, canActivate: [authGuard()] },
+  { path: '', pathMatch: 'full', redirectTo: 'home-page' },
+  { path: '**', redirectTo: 'home-page' },
+];
+`,
+  );
+
+  editText(join(app, 'app.config.ts'), (t) =>
+    t
+      .replace("import { provideI18n, provideTheme } from 'a-common-lib';", "import { provideFirebase, provideI18n, provideTheme } from 'a-common-lib';")
+      .replace("import { routes } from './app.routes';", "import { firebaseConfig } from './firebase.config';\nimport { routes } from './app.routes';")
+      .replace('    provideRouter(routes),\n', '    provideRouter(routes),\n    provideFirebase(firebaseConfig),\n'),
+  );
+
+  put(
+    'pages/login-page/login-page.component.ts',
+    `import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginComponent } from 'a-common-lib';
+
+@Component({
+  selector: 'app-login-page',
+  imports: [LoginComponent],
+  templateUrl: './login-page.component.html',
+  styleUrl: './login-page.component.scss',
+})
+export class LoginPageComponent {
+  private readonly router = inject(Router);
+
+  protected onSignedIn() {
+    this.router.navigate(['/home-page']);
+  }
+}
+`,
+  );
+  put('pages/login-page/login-page.component.html', '<lib-login (signedIn)="onSignedIn()" />\n');
+  put('pages/login-page/login-page.component.scss', ':host { display: block; padding: 1rem; }\n');
+  put('pages/login-page/index.ts', "export * from './login-page.component';\n");
+
+  put(
+    'pages/home-page/home-page.component.ts',
+    `import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'a-common-lib';
+
+@Component({
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.scss',
+})
+export class HomePageComponent {
+  protected readonly auth = inject(AuthService);
+  private readonly router = inject(Router);
+
+  protected async logout() {
+    await this.auth.signOut();
+    this.router.navigate(['/login-page']);
+  }
+}
+`,
+  );
+  put(
+    'pages/home-page/home-page.component.html',
+    `<h2>Home</h2>
+<p>Welcome, {{ auth.user()?.displayName ?? auth.user()?.email }}</p>
+<button type="button" (click)="logout()">Sign out</button>
+`,
+  );
+  put('pages/home-page/home-page.component.scss', ':host { display: block; padding: 1rem; }\n');
+  put('pages/home-page/index.ts', "export * from './home-page.component';\n");
 }
 
 // ---------- 2. angular.json ----------
