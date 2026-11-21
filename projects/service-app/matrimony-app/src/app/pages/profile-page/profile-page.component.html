@@ -1,0 +1,135 @@
+<h2>{{ editing() ? 'Edit your profile' : 'Create your profile' }}</h2>
+
+@if (loading()) {
+  <p>Loading...</p>
+} @else {
+  <p class="progress" aria-live="polite">
+    Step {{ step() + 1 }} of {{ steps.length }} · <b>{{ steps[step()].title }}</b>
+  </p>
+  <div class="dots" aria-hidden="true">
+    @for (s of steps; track s.title; let i = $index) {
+      <span [class.done]="i <= step()"></span>
+    }
+  </div>
+
+  <form [formRoot]="f">
+    <div class="viewport">
+      <div class="track" [style.transform]="'translateX(-' + step() * 100 + '%)'">
+
+        <fieldset class="card" [attr.inert]="step() !== 0 ? '' : null">
+          <legend>Basic details</legend>
+
+          <label>This profile is for
+            <select [formField]="f.createdFor">
+              @for (o of createdFor; track o.value) { <option [value]="o.value">{{ o.label }}</option> }
+            </select>
+          </label>
+
+          <label>Full name
+            <input [formField]="f.name" autocomplete="name" />
+            @if (f.name().touched()) { @for (e of f.name().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Gender
+            <select [formField]="f.gender">
+              <option value="" disabled>Select</option>
+              @for (o of genders; track o.value) { <option [value]="o.value">{{ o.label }}</option> }
+            </select>
+            @if (f.gender().touched()) { @for (e of f.gender().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Date of birth
+            <input type="date" [formField]="f.dob" [max]="today" />
+            @if (f.dob().touched()) { @for (e of f.dob().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Marital status
+            <select [formField]="f.maritalStatus">
+              @for (o of maritalStatuses; track o.value) { <option [value]="o.value">{{ o.label }}</option> }
+            </select>
+          </label>
+
+          <label>Height (cm)
+            <input type="number" [formField]="f.heightCm" />
+            @if (f.heightCm().touched()) { @for (e of f.heightCm().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+        </fieldset>
+
+        <fieldset class="card" [attr.inert]="step() !== 1 ? '' : null">
+          <legend>Background</legend>
+
+          <label>Religion
+            <select [formField]="f.religion">
+              <option value="" disabled>Select</option>
+              @for (o of religions; track o) { <option [value]="o">{{ o }}</option> }
+            </select>
+            @if (f.religion().touched()) { @for (e of f.religion().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Mother tongue
+            <select [formField]="f.motherTongue">
+              <option value="" disabled>Select</option>
+              @for (o of motherTongues; track o) { <option [value]="o">{{ o }}</option> }
+            </select>
+            @if (f.motherTongue().touched()) { @for (e of f.motherTongue().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Education
+            <select [formField]="f.education">
+              <option value="" disabled>Select</option>
+              @for (o of educations; track o) { <option [value]="o">{{ o }}</option> }
+            </select>
+            @if (f.education().touched()) { @for (e of f.education().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Occupation
+            <input [formField]="f.occupation" />
+            @if (f.occupation().touched()) { @for (e of f.occupation().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+        </fieldset>
+
+        <fieldset class="card" [attr.inert]="step() !== 2 ? '' : null">
+          <legend>Location</legend>
+
+          <label>City
+            <input [formField]="f.city" autocomplete="address-level2" />
+            @if (f.city().touched()) { @for (e of f.city().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>State
+            <input [formField]="f.state" autocomplete="address-level1" />
+            @if (f.state().touched()) { @for (e of f.state().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+
+          <label>Country
+            <input [formField]="f.country" autocomplete="country-name" />
+            @if (f.country().touched()) { @for (e of f.country().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+        </fieldset>
+
+        <fieldset class="card" [attr.inert]="step() !== 3 ? '' : null">
+          <legend>About</legend>
+
+          <label>A few words about yourself (optional)
+            <textarea [formField]="f.about" rows="5"></textarea>
+            @if (f.about().touched()) { @for (e of f.about().errors(); track e.kind) { <small class="err">{{ e.message }}</small> } }
+          </label>
+        </fieldset>
+
+      </div>
+    </div>
+
+    @if (error()) { <p class="err" role="alert">{{ error() }}</p> }
+
+    <div class="actions">
+      @if (step() > 0) {
+        <button type="button" class="secondary" (click)="back()">Back</button>
+      }
+      @if (isLast()) {
+        <button type="submit" [disabled]="f().submitting()">{{ f().submitting() ? 'Saving...' : 'Save profile' }}</button>
+      } @else {
+        <button type="button" (click)="next()">Next</button>
+      }
+    </div>
+  </form>
+}
