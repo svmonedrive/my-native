@@ -25,3 +25,4 @@ export * from './lib/site/action-tiles/action-tiles.component';
 export * from './lib/site/card-grid/card-grid.component';
 export * from './lib/site/logo-strip/logo-strip.component';
 export * from './lib/site/cta-banner/cta-banner.component';
+export * from './lib/firestore';
