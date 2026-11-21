@@ -1,3 +1,31 @@
-<h2>Home</h2>
-<p>Welcome, {{ auth.user()?.displayName ?? auth.user()?.email }}</p>
-<button type="button" (click)="logout()">Sign out</button>
+<header class="top">
+  <h2>Matches</h2>
+  <nav>
+    <a routerLink="/profile-page">My profile</a>
+    <button type="button" (click)="logout()">Sign out</button>
+  </nav>
+</header>
+
+@if (loading()) {
+  <p class="note">Loading profiles...</p>
+} @else if (error()) {
+  <p class="note err" role="alert">Could not load profiles: {{ error() }}</p>
+} @else if (list().length === 0) {
+  <p class="note">No profiles to show yet.</p>
+} @else {
+  <ul class="list">
+    @for (p of list(); track p.id) {
+      <li class="card">
+        <div class="avatar" aria-hidden="true">{{ initials(p.name) }}</div>
+        <div class="info">
+          <h3>{{ p.name }}</h3>
+          <p class="line">{{ p.age }} yrs · {{ p.heightCm }} cm · {{ marital(p.maritalStatus) }}</p>
+          <p class="line">{{ p.occupation }} · {{ p.education }}</p>
+          <p class="line">{{ p.city }}, {{ p.state }}</p>
+          <p class="tags"><span>{{ p.religion }}</span><span>{{ p.motherTongue }}</span></p>
+          @if (p.about) { <p class="about">{{ p.about }}</p> }
+        </div>
+      </li>
+    }
+  </ul>
+}

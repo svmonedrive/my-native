@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { FirestoreService } from 'a-common-lib';
-import { doc, getDoc, serverTimestamp, writeBatch } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, limit, query, serverTimestamp, where, writeBatch } from 'firebase/firestore';
 import { NewProfileDoc, ProfileDoc, ProfileForm } from '../../models/profile';
 
 const ageOf = (dob: string): number => {
@@ -19,6 +19,26 @@ export class ProfilesService {
   async get(uid: string): Promise<ProfileDoc | null> {
     const snap = await getDoc(doc(this.db, 'profiles', uid));
     return snap.exists() ? (snap.data() as ProfileDoc) : null;
+  }
+
+  /**
+   * Profiles other members may see, without the member's own. Capped; add paging when the list grows.
+   * Both `where`s are equality filters, so Firestore needs no extra index, and they match the read rule
+   * (approved + not hidden), which a query must provably satisfy.
+   */
+  async listVisible(excludeUid: string, max = 50): Promise<(ProfileDoc & { id: string })[]> {
+    const snap = await getDocs(
+      query(
+        collection(this.db, 'profiles'),
+        where('status', '==', 'approved'),
+        where('visibility', '==', 'registered'),
+        limit(max),
+      ),
+    );
+    return snap.docs
+      .filter((d) => d.id !== excludeUid)
+      .map((d) => ({ ...(d.data() as ProfileDoc), id: d.id }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   /**
