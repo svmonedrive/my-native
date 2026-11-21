@@ -6,6 +6,14 @@ export type CreatedFor = 'self' | 'son' | 'daughter' | 'brother' | 'sister' | 'r
 export type ProfileStatus = 'draft' | 'pending' | 'approved' | 'rejected' | 'married';
 export type ProfileVisibility = 'public' | 'registered' | 'hidden';
 
+/** An uploaded gallery image (hosted on Cloudinary). */
+export interface ProfilePhoto {
+  url: string;
+  publicId: string;
+}
+
+export const MAX_PHOTOS = 4;
+
 /** The part of a profile the member fills in on the profile page. */
 export interface ProfileForm {
   createdFor: CreatedFor;
@@ -23,6 +31,8 @@ export interface ProfileForm {
   state: string;
   country: string;
   about: string;
+  /** Gallery, at most MAX_PHOTOS. The first photo is the main one. */
+  photos: ProfilePhoto[];
 }
 
 /** Firestore document `profiles/{profileId}`. profileId equals the owner's uid (one profile per account). */

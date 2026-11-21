@@ -1,0 +1,28 @@
+<p class="count">{{ photos().length }} of {{ max }} photos. The first photo is shown on your card.</p>
+
+<ul class="grid">
+  @for (p of photos(); track p.publicId; let i = $index) {
+    <li class="tile">
+      <img [src]="thumb(p.url)" [alt]="'Photo ' + (i + 1)" loading="lazy" />
+      @if (i === 0) { <span class="badge">Main</span> }
+      <div class="tools">
+        @if (i !== 0) { <button type="button" (click)="makeMain(i)">Make main</button> }
+        <button type="button" class="danger" (click)="remove(i)" [disabled]="uploading()">Remove</button>
+      </div>
+    </li>
+  }
+
+  @if (uploading()) {
+    <li class="tile placeholder" aria-live="polite">Uploading...</li>
+  } @else if (canAdd()) {
+    <li class="tile placeholder">
+      <label>
+        <span class="plus" aria-hidden="true">+</span>
+        Add photo
+        <input type="file" accept="image/*" (change)="onFileChosen($event)" />
+      </label>
+    </li>
+  }
+</ul>
+
+@if (error()) { <p class="err" role="alert">{{ error() }}</p> }

@@ -1,0 +1,30 @@
+:host { display: block; }
+.count { margin: 0 0 0.75rem; font-size: 0.9rem; color: var(--color-muted); }
+
+.grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.tile { position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--color-border); background: var(--color-bg); }
+.tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.badge { position: absolute; top: 0.4rem; left: 0.4rem; padding: 0.1rem 0.5rem; font-size: 0.75rem; border-radius: 999px;
+  color: var(--color-on-primary); background: var(--color-primary); }
+
+.tools { position: absolute; left: 0; right: 0; bottom: 0; display: flex; gap: 0.35rem; padding: 0.4rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.65)); }
+.tools button { flex: 1; font: inherit; font-size: 0.75rem; padding: 0.3rem 0.2rem; cursor: pointer; border-radius: 6px;
+  color: #fff; background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); }
+.tools button.danger { background: rgba(220, 38, 38, 0.75); border-color: transparent; }
+.tools button:disabled { opacity: 0.5; cursor: default; }
+
+.placeholder { display: grid; place-items: center; text-align: center; color: var(--color-muted); border-style: dashed; }
+.placeholder label { display: grid; place-items: center; gap: 0.15rem; width: 100%; height: 100%; cursor: pointer; }
+.placeholder .plus { font-size: 2rem; line-height: 1; }
+/* The native file input is hidden; the label opens it. It stays keyboard-focusable through the label's focus ring. */
+.placeholder input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.placeholder label:focus-within { outline: 2px solid var(--color-primary); outline-offset: -2px; }
+
+.err { color: #dc2626; margin: 0.75rem 0 0; }
+
+@media (min-width: 480px) {
+  .grid { grid-template-columns: repeat(4, 1fr); }
+}

@@ -16,7 +16,11 @@
   <ul class="list">
     @for (p of list(); track p.id) {
       <li class="card">
-        <div class="avatar" aria-hidden="true">{{ initials(p.name) }}</div>
+        @if (p.photos?.[0]; as photo) {
+          <img class="avatar" [src]="thumb(photo.url)" [alt]="p.name" loading="lazy" />
+        } @else {
+          <div class="avatar" aria-hidden="true">{{ initials(p.name) }}</div>
+        }
         <div class="info">
           <h3>{{ p.name }}</h3>
           <p class="line">{{ p.age }} yrs · {{ p.heightCm }} cm · {{ marital(p.maritalStatus) }}</p>

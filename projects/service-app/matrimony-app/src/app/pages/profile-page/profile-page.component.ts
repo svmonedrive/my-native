@@ -9,9 +9,11 @@ import {
   MARITAL_STATUS_OPTIONS,
   MOTHER_TONGUE_OPTIONS,
   ProfileForm,
+  ProfilePhoto,
   RELIGION_OPTIONS,
 } from '../../models/profile';
 import { ProfilesService } from '../../services/profiles';
+import { PhotoGalleryComponent } from '../../components/photo-gallery';
 
 /** The form model: same as the saved profile, except gender starts unselected. */
 type ProfileModel = Omit<ProfileForm, 'gender'> & { gender: ProfileForm['gender'] | '' };
@@ -31,11 +33,12 @@ const emptyProfile = (): ProfileModel => ({
   state: '',
   country: 'India',
   about: '',
+  photos: [],
 });
 
 @Component({
   selector: 'app-profile-page',
-  imports: [FormField, FormRoot],
+  imports: [FormField, FormRoot, PhotoGalleryComponent],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
 })
@@ -63,11 +66,12 @@ export class ProfilePageComponent implements OnInit {
     { title: 'Background', fields: ['religion', 'motherTongue', 'education', 'occupation'] },
     { title: 'Location', fields: ['city', 'state', 'country'] },
     { title: 'About', fields: ['about'] },
+    { title: 'Photos', fields: [] },
   ];
   protected readonly step = signal(0);
   protected readonly isLast = computed(() => this.step() === this.steps.length - 1);
 
-  private readonly model = signal<ProfileModel>(emptyProfile());
+  protected readonly model = signal<ProfileModel>(emptyProfile());
 
   protected readonly f = form(
     this.model,
@@ -110,6 +114,10 @@ export class ProfilePageComponent implements OnInit {
       },
     },
   );
+
+  protected setPhotos(photos: ProfilePhoto[]) {
+    this.model.update((m) => ({ ...m, photos }));
+  }
 
   protected back() {
     this.step.update((s) => Math.max(0, s - 1));

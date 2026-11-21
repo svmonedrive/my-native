@@ -1,6 +1,7 @@
 import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideFirebase, provideI18n, provideTheme } from 'a-common-lib';
+import { provideCloudinary, provideFirebase, provideI18n, provideTheme } from 'a-common-lib';
+import { cloudinaryConfig } from './cloudinary.config';
 import { UsersService } from './services/users';
 
 import { firebaseConfig } from './firebase.config';
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideFirebase(firebaseConfig),
+    provideCloudinary(cloudinaryConfig),
     // Creates/updates users/{uid} whenever someone signs in.
     provideAppInitializer(() => void inject(UsersService)),
     // Service-specific texts go into provideI18n({ en: {...}, bn: {...}, hi: {...} }).

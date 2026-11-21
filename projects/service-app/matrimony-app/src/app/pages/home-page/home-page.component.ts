@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'a-common-lib';
 import { MARITAL_STATUS_OPTIONS, ProfileDoc } from '../../models/profile';
 import { ProfilesService } from '../../services/profiles';
+import { thumbUrl } from '../../utils/thumb-url';
 
 type ProfileCard = ProfileDoc & { id: string };
 
@@ -20,6 +21,7 @@ export class HomePageComponent implements OnInit {
   protected readonly list = signal<ProfileCard[]>([]);
   protected readonly loading = signal(true);
   protected readonly error = signal('');
+  protected readonly thumb = thumbUrl;
 
   async ngOnInit() {
     const uid = this.auth.auth.currentUser?.uid ?? '';

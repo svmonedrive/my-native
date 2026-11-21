@@ -116,6 +116,11 @@
           </label>
         </fieldset>
 
+        <fieldset class="card" [attr.inert]="step() !== 4 ? '' : null">
+          <legend>Photos</legend>
+          <app-photo-gallery [photos]="model().photos" (photosChange)="setPhotos($event)" />
+        </fieldset>
+
       </div>
     </div>
 
